@@ -1,6 +1,7 @@
 import type { RegistryEntry } from "@/registry/types";
 import { portfolioRegistry } from "@/registry/portfolio";
 import { uiExtraRegistry } from "@/registry/ui-extra";
+import { seoRegistry } from "@/registry/seo";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
@@ -366,6 +367,7 @@ export const registry: RegistryEntry[] = [
   ...portfolioRegistry,
   ...uiRegistry,
   ...uiExtraRegistry,
+  ...seoRegistry,
 ];
 
 export function getEntry(slug: string): RegistryEntry | undefined {
