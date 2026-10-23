@@ -1,6 +1,8 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/components/" },
-    { "source": "/components/(.*)", "destination": "/components/index.html" }
+    {
+      "source": "/components/:path*",
+      "destination": "https://components-project.vercel.app/components/:path*"
+    }
   ]
 }
