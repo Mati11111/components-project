@@ -3,7 +3,7 @@
 /* --- Stellar: fuente de la plataforma (servida desde /public/fonts) --- */
 @font-face {
     font-family: "Stellar";
-    src: url("/componentes/fonts/Stellar-Regular.woff") format("woff");
+    src: url("/components/fonts/Stellar-Regular.woff") format("woff");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: "Stellar";
-    src: url("/componentes/fonts/Stellar-light.woff") format("woff");
+    src: url("/components/fonts/Stellar-light.woff") format("woff");
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: "Stellar";
-    src: url("/componentes/fonts/Stellar-Medium.woff") format("woff");
+    src: url("/components/fonts/Stellar-Medium.woff") format("woff");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
     font-family: "Stellar";
-    src: url("/componentes/fonts/Stellar-Bold.woff") format("woff");
+    src: url("/components/fonts/Stellar-Bold.woff") format("woff");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
