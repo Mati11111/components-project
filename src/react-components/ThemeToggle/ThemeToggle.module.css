@@ -1,0 +1,113 @@
+/* ThemeToggle component theme (dark-terminal defaults) */
+.toggle {
+  /* theme tokens -> override from the outside with these CSS variables */
+  --toggle-icon-color: currentColor;
+  --toggle-bg: transparent;
+  --toggle-bg-hover: rgba(128, 128, 128, 0.18);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--toggle-bg);
+  color: var(--toggle-icon-color);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+}
+
+.toggle:hover {
+  background: var(--toggle-bg-hover);
+}
+
+.toggle:active {
+  transform: scale(0.92);
+}
+
+.icon {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  position: relative;
+  color: var(--toggle-icon-color);
+  animation: themeRotateSwitch 0.4s ease-in-out forwards;
+}
+
+.iconBack {
+  animation: themeRotateSwitchBack 0.4s ease-in-out forwards;
+}
+
+/* ----- Sun: a filled disc with 8 rays made from box-shadow dots ----- */
+.sun::before {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.sun::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: currentColor;
+  /* 8 rays around the disc */
+  box-shadow:
+    0 -0.55rem,
+    0 0.55rem,
+    -0.55rem 0,
+    0.55rem 0,
+    -0.39rem -0.39rem,
+    0.39rem -0.39rem,
+    -0.39rem 0.39rem,
+    0.39rem 0.39rem;
+  transform: translate(-50%, -50%);
+}
+
+/* ----- Moon: a crescent cut out of a disc with a radial mask ----- */
+.moon::before {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: currentColor;
+  /* carve a bite out of the top-right to leave a crescent; the mask makes
+     the removed area transparent, so it never depends on the backdrop color */
+  -webkit-mask: radial-gradient(
+    circle at 70% 30%,
+    transparent 0 48%,
+    #000 50%
+  );
+  mask: radial-gradient(circle at 70% 30%, transparent 0 48%, #000 50%);
+}
+
+@keyframes themeRotateSwitch {
+  from {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(90deg);
+    opacity: 1;
+  }
+}
+
+@keyframes themeRotateSwitchBack {
+  from {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+/* --- Stellar: fuente de la plataforma (servida desde /public/fonts) --- */
+@font-face {
+    font-family: "Stellar";
+    src: url("/componentes/fonts/Stellar-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Stellar";
+    src: url("/componentes/fonts/Stellar-light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Stellar";
+    src: url("/componentes/fonts/Stellar-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Stellar";
+    src: url("/componentes/fonts/Stellar-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+ * Paleta base (6 colores de la plataforma "dark terminal"):
+ *   #181818  negro casi puro   #dddddd  gris claro
+ *   #d6d6d7  gris claro barras  #202124  gris muy oscuro
+ *   #323639  gris oscuro        #424242  gris medio
+ *
+ * Los tokens --* cambian con el tema (light default / dark por .dark),
+ * y @theme los expone como clases de Tailwind (bg-bg, text-accent, etc.).
+ */
+:root {
+    /* colores crudos de la paleta (no cambian entre temas) */
+    --c-black: #181818;
+    --c-light: #dddddd;
+    --c-light-2: #d6d6d7;
+    --c-dark: #202124;
+    --c-selected: #323639;
+    --c-variant: #424242;
+
+    /* --- tema LIGHT (default) --- */
+    --text: #181818;
+    --text-h: #181818;
+    --bg: #ffffff;
+    --surface: #f4f4f4;
+    --border: #d6d6d7;
+    --code-bg: #f0f0f0;
+    --accent: #181818;
+    --accent-bg: rgba(24, 24, 24, 0.08);
+    --accent-border: rgba(24, 24, 24, 0.35);
+    --shadow:
+        rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+    --sans: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --heading: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* --- tema DARK: por clase .dark o por preferencia del sistema --- */
+:root.dark,
+:root.theme-dark {
+    --text: #dddddd;
+    --text-h: #dddddd;
+    --bg: #181818;
+    --surface: #202124;
+    --border: #424242;
+    --code-bg: #202124;
+    --accent: #dddddd;
+    --accent-bg: rgba(221, 221, 221, 0.1);
+    --accent-border: #d6d6d7;
+    --shadow:
+        rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+        rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not(.light):not(.theme-light) {
+        --text: #dddddd;
+        --text-h: #dddddd;
+        --bg: #181818;
+        --surface: #202124;
+        --border: #424242;
+        --code-bg: #202124;
+        --accent: #dddddd;
+        --accent-bg: rgba(221, 221, 221, 0.1);
+        --accent-border: #d6d6d7;
+        --shadow:
+            rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+            rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    }
+}
+
+@theme inline {
+    --color-text: var(--text);
+    --color-heading: var(--text-h);
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-border: var(--border);
+    --color-code-bg: var(--code-bg);
+    --color-accent: var(--accent);
+    --color-accent-bg: var(--accent-bg);
+    --color-accent-border: var(--accent-border);
+
+    /* paleta cruda disponible como utilidades (bg-palette-black, etc.) */
+    --color-palette-black: var(--c-black);
+    --color-palette-light: var(--c-light);
+    --color-palette-light-2: var(--c-light-2);
+    --color-palette-dark: var(--c-dark);
+    --color-palette-selected: var(--c-selected);
+    --color-palette-variant: var(--c-variant);
+
+    --font-sans: var(--sans);
+    --font-heading: var(--heading);
+    --font-mono: var(--mono);
+
+    --shadow-theme: var(--shadow);
+
+    --radius-card: 12px;
+}
+
+html {
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    min-height: 100svh;
+    background: var(--bg);
+    color: var(--text);
+    font: 18px/145% var(--sans);
+    letter-spacing: 0.18px;
+}
+
+@media (max-width: 1024px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+/* --- Sonner: estilos de descripción y botón de acción con la paleta --- */
+.sonner-desc {
+    color: var(--text);
+}
+
+.sonner-action {
+    background: var(--accent) !important;
+    color: var(--bg) !important;
+}
+
+/* --- AnimatedText: efecto "reveal" (izquierda a derecha con fade) --- */
+.at-reveal {
+    display: inline-block;
+    animation: atReveal var(--at-duration, 800ms) ease-out var(--at-delay, 0ms)
+        both;
+}
+
+@keyframes atReveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        filter: blur(2px);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        filter: blur(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .at-reveal {
+        animation: none;
+    }
+}
+
+/* --- Modal: animaciones de entrada y salida --- */
+@keyframes modalBackdropIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalBackdropOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalPanelOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+}
+
+.modal-backdrop-in {
+    animation: modalBackdropIn 200ms ease-out both;
+}
+
+.modal-backdrop-out {
+    animation: modalBackdropOut 180ms ease-in both;
+}
+
+.modal-panel-in {
+    animation: modalPanelIn 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-panel-out {
+    animation: modalPanelOut 180ms ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-backdrop-in,
+    .modal-backdrop-out,
+    .modal-panel-in,
+    .modal-panel-out {
+        animation: none;
+    }
+}
+
+/* Oculta la barra de scroll manteniendo el scroll funcional (usado por el Carousel vertical). */
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+}

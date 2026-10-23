@@ -1,0 +1,181 @@
+/* Footer component theme (dark-terminal defaults) */
+.footer {
+  /* theme tokens -> override from the outside with these CSS variables */
+  --footer-icon-color: #dddddd;
+  --footer-text: #dddddd;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--footer-text);
+  font-family: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.iconsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 1.5rem;
+  opacity: 0;
+}
+
+.iconsVisible {
+  opacity: 1;
+  animation: footerIconsAppear 0.2s ease-in-out;
+}
+
+.iconLink,
+.iconButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.icon {
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--footer-icon-color);
+  fill: var(--footer-icon-color);
+}
+
+/* hover animation on icons */
+.iconLink:hover .icon,
+.iconButton:hover .icon {
+  animation: footerMoveIcon 0.2s ease-in-out forwards;
+}
+
+.iconLink:active .icon,
+.iconButton:active .icon {
+  animation: footerClickIcon 0.2s ease-in-out;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.signBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.sign {
+  opacity: 0;
+}
+
+.signVisible {
+  opacity: 1;
+  clip-path: inset(0 100% 0 0);
+  animation: footerRevealSign 1.5s forwards;
+}
+
+.copyrightRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyright {
+  opacity: 0;
+}
+
+.copyrightVisible {
+  opacity: 1;
+  animation: footerCopyrightLogo 0.2s;
+}
+
+.copyrightYear {
+  opacity: 0;
+}
+
+.copyrightYearVisible {
+  opacity: 1;
+  animation: footerCopyrightYear 0.2s;
+}
+
+@keyframes footerIconsAppear {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes footerMoveIcon {
+  from {
+    transform: translateY(0);
+    rotate: 0deg;
+  }
+  to {
+    transform: translateY(-0.5rem);
+    rotate: 10deg;
+  }
+}
+
+@keyframes footerClickIcon {
+  0% {
+    transform: translateY(0);
+    rotate: 0deg;
+  }
+  40% {
+    transform: translateY(-0.6rem);
+    rotate: 10deg;
+  }
+  100% {
+    transform: translateY(0);
+    rotate: 0deg;
+  }
+}
+
+@keyframes footerRevealSign {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes footerCopyrightLogo {
+  from {
+    scale: 2;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes footerCopyrightYear {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

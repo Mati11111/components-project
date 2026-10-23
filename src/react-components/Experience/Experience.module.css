@@ -1,0 +1,176 @@
+/* Experience component theme (dark-terminal defaults) */
+.experience {
+  /* theme tokens -> follow the global light/dark theme by default.
+     Fallbacks keep the dark-terminal look if the global tokens are absent. */
+  --exp-header-bg: var(--surface, #181818);
+  --exp-body-bg: var(--bg, #202124);
+  --exp-text: var(--text, #dddddd);
+  --exp-text-strong: var(--bg, #181818);
+  --exp-bg-strong: var(--accent, #dddddd);
+  --exp-border: var(--border, #424242);
+  --exp-muted: color-mix(in srgb, var(--text, #dddddd) 55%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--exp-header-bg);
+  background-color: var(--exp-body-bg);
+  color: var(--exp-text);
+  font-family: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+  animation: experienceOpen 0.4s ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0 0.75rem;
+  background-color: var(--exp-header-bg);
+  color: var(--exp-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.path {
+  font-size: 0.8rem;
+  color: var(--exp-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--exp-border);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+  margin: 0;
+  padding: 0.5rem;
+  list-style: none;
+  gap: 0.15rem;
+  overflow-y: auto;
+  border-right: 1px solid var(--exp-border);
+}
+
+.rowButton {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.2rem 0.5rem;
+  background: transparent;
+  border: 0;
+  color: var(--exp-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.12s ease-in-out;
+}
+
+.rowButton:hover {
+  background-color: color-mix(in srgb, var(--text, #dddddd) 12%, transparent);
+}
+
+.rowSelected,
+.rowSelected:hover {
+  background-color: var(--exp-bg-strong);
+  color: var(--exp-text-strong);
+  font-weight: 600;
+}
+
+/* ----- detail ----- */
+.detail {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  background-color: var(--exp-body-bg);
+}
+
+.detailTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--exp-text);
+}
+
+.detailSubtitle {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--exp-muted);
+}
+
+.detailDate {
+  margin: 1rem 0 0;
+  font-size: 1.1rem;
+  color: var(--exp-text);
+}
+
+.detailDescription {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--exp-text);
+  text-align: justify;
+}
+
+.detailTags {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--exp-text);
+  text-align: right;
+}
+
+@keyframes experienceOpen {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* mobile: stack columns */
+@media (max-width: 767px) {
+  .columns {
+    flex-direction: column;
+  }
+  .column {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--exp-border);
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .detail {
+    padding: 1rem;
+  }
+}

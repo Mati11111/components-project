@@ -1,0 +1,155 @@
+/* Terminal component theme (dark-terminal defaults) */
+.terminal {
+  /* theme tokens -> follow the global light/dark theme by default.
+     Fallbacks keep the dark-terminal look if the global tokens are absent. */
+  --terminal-header-bg: var(--surface, #202124);
+  --terminal-header-text: var(--text, #dddddd);
+  --terminal-body-bg: var(--bg, #202124);
+  --terminal-body-text: var(--text, #dddddd);
+  --terminal-border: var(--border, #202124);
+  --terminal-cursor: var(--accent, #323639);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--terminal-border);
+  background-color: var(--terminal-header-bg);
+  color: var(--terminal-body-text);
+  font-family: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+  animation: terminalOpen 0.5s ease-out;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.5rem;
+  width: 100%;
+  padding: 0 0.75rem;
+  background-color: var(--terminal-header-bg);
+  color: var(--terminal-header-text);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* header bar reads on the dark body: a light label */
+  color: var(--terminal-body-text);
+}
+
+.body {
+  flex: 1;
+  width: 100%;
+  padding: 1.25rem;
+  background-color: var(--terminal-body-bg);
+  color: var(--terminal-body-text);
+  overflow: auto;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.prompt {
+  font-weight: 500;
+  width: fit-content;
+}
+
+.commandText {
+  width: fit-content;
+  overflow: hidden;
+}
+
+/* typewriter reveal for command lines */
+.typing {
+  clip-path: inset(0 100% 0 0);
+  animation: terminalReveal 0.3s ease-out forwards;
+}
+
+.outputText {
+  width: fit-content;
+  text-align: justify;
+  white-space: normal;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.cursor {
+  width: 0.6rem;
+  align-self: stretch;
+  min-height: 1.25rem;
+  background-color: var(--terminal-cursor);
+}
+
+.cursorBlinking {
+  animation: terminalBlinking 1s infinite;
+}
+
+/* block cursor that translates across the command as it types */
+.cursorTranslating {
+  animation: terminalTranslateX 0.3s ease-out;
+}
+
+@keyframes terminalOpen {
+  0% {
+    transform: scaleX(0) scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(0.8) scaleY(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes terminalReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes terminalBlinking {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes terminalTranslateX {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--translate-distance, 100%));
+    opacity: 1;
+  }
+}

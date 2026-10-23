@@ -1,0 +1,150 @@
+/* Header component theme (dark-terminal defaults) */
+.header {
+  /* color fijo, independiente del tema: siempre el gris claro de la paleta.
+     se puede sobrescribir pasando --header-text desde fuera. */
+  --header-text: #dddddd;
+  /* size scales with the container width, not the viewport */
+  --header-huge: clamp(2rem, 14cqw, 9rem);
+  --header-tracking: clamp(0.25rem, 2cqw, 1.5rem);
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 8rem;
+  padding: 1rem;
+  overflow: hidden;
+  color: var(--header-text);
+  font-family: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
+  container-type: inline-size;
+}
+
+.name,
+.decoration {
+  margin: 0;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* wrapper del ancho del texto: ancla el reveal y el barrido del `>` */
+.sweepWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2cqw, 1.5rem);
+  max-width: 100%;
+  white-space: nowrap;
+  /* se revela de izquierda a derecha, en sincronía con el `>` */
+  clip-path: inset(0 100% 0 0);
+  animation: headerRevealLeft 0.3s linear forwards;
+}
+
+/* mismo layout que .nameWrapper pero oculto: reserva el ancho del texto
+   mientras parpadea el `>`, para que el barrido arranque en el borde real */
+.nameHidden {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2cqw, 1.5rem);
+  max-width: 100%;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.name {
+  display: inline-block;
+  font-size: var(--header-huge);
+  line-height: 1;
+  letter-spacing: var(--header-tracking);
+  margin-right: calc(var(--header-tracking) * -1);
+}
+
+.decoration {
+  display: inline-block;
+  font-size: var(--header-huge);
+  line-height: 1;
+}
+
+/* el `>` que parpadea, en el MISMO punto de inicio que el barrido
+   (borde izquierdo del texto) para que no haya salto al cambiar de step */
+.blinkPrompt {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 2;
+  font-size: var(--header-huge);
+  line-height: 1;
+  color: var(--header-text);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  animation: headerBlinking 1s ease-in-out;
+}
+
+/*
+ * El `>` que barre: parte del borde izquierdo del texto y viaja hasta el
+ * borde derecho (100% del ancho del wrapper) con la MISMA duración y easing
+ * que el reveal, así el prompt y el borde revelado avanzan juntos.
+ */
+.sweepPrompt {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 2;
+  font-size: var(--header-huge);
+  line-height: 1;
+  color: var(--header-text);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  animation: headerSweep 0.3s linear forwards;
+}
+
+@keyframes headerBlinking {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes headerRevealLeft {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* el `>` viaja de izquierda a derecha a lo largo del ancho del texto */
+@keyframes headerSweep {
+  from {
+    left: 0;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    left: 100%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+}
