@@ -13,27 +13,45 @@
      (ya publicado con la libreria). Debe estar accesible publicamente para que
      el avatar se vea en el correo del destinatario.
   2. Abre este archivo en el navegador, selecciona la firma y copia (Cmd/Ctrl+C).
-  3. Gmail: Configuracion > Ver toda la configuracion > General > Firma > pega y guarda.
+  3. Truco Gmail: pega primero en un Google Doc, copia desde ahi y pega en Gmail.
+     Asi conserva el formato y el avatar. (Config > Ver toda la config > Firma.)
   4. Outlook / Apple Mail: pega la firma en el editor de firma de la app.
 -->
 
 <!-- ===================== FIRMA (copiar desde aqui) ===================== -->
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; background:#dddddd; border:2px solid #181818;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate; width:420px; border:1px solid #181818; border-radius:10px; overflow:hidden; font-family:Arial, Helvetica, sans-serif;">
+  <!-- Barra superior estilo terminal -->
   <tr>
-    <td style="padding:18px;">
+    <td style="background:#181818; padding:9px 14px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; width:100%;">
+        <tr>
+          <td valign="middle" style="width:54px;">
+            <span style="display:inline-block; width:11px; height:11px; border-radius:50%; background:#ff5f56; margin-right:7px;">&nbsp;</span><span style="display:inline-block; width:11px; height:11px; border-radius:50%; background:#ffbd2e; margin-right:7px;">&nbsp;</span><span style="display:inline-block; width:11px; height:11px; border-radius:50%; background:#27c93f;">&nbsp;</span>
+          </td>
+          <td valign="middle" align="center" style="font-family:'SF Mono','Menlo','Consolas',monospace; font-size:12px; color:#dddddd; letter-spacing:0.3px;">
+            matias@mati-dev.cl&nbsp;—&nbsp;zsh
+          </td>
+          <td style="width:54px;">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- Cuerpo con fondo blanco -->
+  <tr>
+    <td style="background:#ffffff; padding:18px;">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; font-family:Arial, Helvetica, sans-serif;">
         <tr>
           <td valign="middle" style="padding:0 16px 0 0;">
             <img src="https://mati-dev.cl/components/brand/mati-avatar.png"
-                 width="84" height="84" alt="Matías Chaparro"
-                 style="display:block; width:84px; height:84px; border-radius:50%; border:0; outline:none; text-decoration:none;">
+                 width="76" height="76" alt="Matías Chaparro"
+                 style="display:block; width:76px; height:76px; border-radius:50%; border:0; outline:none; text-decoration:none;">
           </td>
           <td valign="middle" style="font-family:Arial, Helvetica, sans-serif; line-height:1.5;">
             <div style="font-size:18px; font-weight:bold; color:#181818; letter-spacing:0.3px;">
               Matías I. Chaparro Díaz
             </div>
-            <div style="font-size:11px; font-weight:bold; color:#424242; letter-spacing:1.2px; padding:2px 0 6px;">
-              DESARROLLADOR JUNIOR
+            <div style="font-family:'SF Mono','Menlo','Consolas',monospace; font-size:11px; font-weight:bold; color:#181818; letter-spacing:1px; padding:3px 0 7px;">
+              &gt; desarrollador junior
             </div>
             <div style="font-size:13px; color:#181818; padding:1px 0;">
               <a href="mailto:matias.chaparro.mail@gmail.com" style="color:#181818; text-decoration:none;">matias.chaparro.mail@gmail.com</a>
@@ -42,7 +60,7 @@
               <a href="tel:+56959075043" style="color:#181818; text-decoration:none;">+56 9 5907 5043</a>
             </div>
             <div style="font-size:13px; padding:5px 0 0;">
-              <a href="https://mati-dev.cl" style="color:#181818; font-weight:bold; text-decoration:none;">mati-dev.cl &nbsp;&rsaquo;</a>
+              <a href="https://mati-dev.cl" style="color:#181818; font-weight:bold; text-decoration:underline;">mati-dev.cl &nbsp;&rsaquo;</a>
             </div>
           </td>
         </tr>
