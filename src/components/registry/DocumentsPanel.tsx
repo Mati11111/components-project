@@ -10,6 +10,12 @@ interface AssetDoc {
   files: AssetFile[];
   /** Fondo de la previsualización: claro u oscuro. */
   previewBg?: "light" | "dark";
+  /**
+   * Ruta (dentro de public/) de un HTML a renderizar en la previsualización
+   * mediante un <iframe>. Útil para assets que son HTML (ej: la firma), así el
+   * preview refleja el archivo real en vez de una imagen estática.
+   */
+  previewHtml?: string;
 }
 
 interface AssetFile {
@@ -63,7 +69,8 @@ const assets: AssetDoc[] = [
     name: "Firma",
     description:
       "Firma de correo con el wordmark “MATI”. Versión HTML para Gmail/Outlook e imagen a prueba de fallos.",
-    previewBg: "dark",
+    previewBg: "light",
+    previewHtml: "brand/firma-email.html",
     files: [
       {
         label: "PNG",
@@ -141,17 +148,27 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-card border border-border bg-surface">
       <div
-        className="flex h-40 w-full items-center justify-center border-b border-border p-6"
+        className="flex h-40 w-full items-center justify-center overflow-hidden border-b border-border p-6"
         style={{
           background: asset.previewBg === "dark" ? "#181818" : "#ededed",
         }}
       >
-        <img
-          src={publicUrl(preview.file)}
-          alt={asset.name}
-          className="max-h-full max-w-full object-contain"
-          loading="lazy"
-        />
+        {asset.previewHtml ? (
+          <iframe
+            src={publicUrl(asset.previewHtml)}
+            title={`${asset.name} (preview)`}
+            loading="lazy"
+            scrolling="no"
+            className="pointer-events-none h-full w-full border-0"
+          />
+        ) : (
+          <img
+            src={publicUrl(preview.file)}
+            alt={asset.name}
+            className="max-h-full max-w-full object-contain"
+            loading="lazy"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-col gap-1">
