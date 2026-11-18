@@ -112,6 +112,37 @@ const assets: AssetDoc[] = [
       },
     ],
   },
+  {
+    name: "Carta de presentación",
+    description:
+      "Recorrido completo de experiencia, formación y habilidades, en formato poco técnico.",
+    previewBg: "light",
+    files: [
+      {
+        label: "SVG",
+        file: "documents/carta-presentacion.svg",
+        downloadName: "carta_presentacion_matias_chaparro.svg",
+      },
+      {
+        label: "PDF",
+        file: "documents/carta-presentacion.pdf",
+        downloadName: "carta_presentacion_matias_chaparro.pdf",
+      },
+    ],
+  },
+  {
+    name: "CV",
+    description:
+      "CV profesional de una página con las últimas experiencias y tecnologías.",
+    previewBg: "light",
+    files: [
+      {
+        label: "PDF",
+        file: "documents/cv.pdf",
+        downloadName: "cv_matias_chaparro.pdf",
+      },
+    ],
+  },
 ];
 
 async function copyUrl(url: string) {
