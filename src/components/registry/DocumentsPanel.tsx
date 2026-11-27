@@ -48,6 +48,24 @@ function absoluteUrl(file: string): string {
 
 const assets: AssetDoc[] = [
   {
+    name: "Imagen social HUD",
+    description:
+      "Open Graph con la marca HUD (1200×630): cuadrícula, marcas de registro y acento naranja. Úsala en og:image y twitter:image.",
+    previewBg: "dark",
+    files: [
+      {
+        label: "PNG",
+        file: "brand/mati-social-hud.png",
+        downloadName: "mati-social-hud.png",
+      },
+      {
+        label: "SVG",
+        file: "brand/mati-social-hud.svg",
+        downloadName: "mati-social-hud.svg",
+      },
+    ],
+  },
+  {
     name: "Imagen social",
     description:
       "Open Graph / preview al compartir el link (1200×630). Úsala en og:image y twitter:image.",
@@ -115,18 +133,14 @@ const assets: AssetDoc[] = [
   {
     name: "Carta de presentación",
     description:
-      "Recorrido completo de experiencia, formación y habilidades, en formato poco técnico.",
-    previewBg: "light",
+      "Recorrido completo de experiencia, formación y habilidades, en formato poco técnico. Versión web con la marca HUD: línea de tiempo, tema claro/oscuro e impresión.",
+    previewBg: "dark",
+    previewHtml: "documents/carta-presentacion.html",
     files: [
       {
-        label: "SVG",
-        file: "documents/carta-presentacion.svg",
-        downloadName: "carta_presentacion_matias_chaparro.svg",
-      },
-      {
-        label: "PDF",
-        file: "documents/carta-presentacion.pdf",
-        downloadName: "carta_presentacion_matias_chaparro.pdf",
+        label: "HTML",
+        file: "documents/carta-presentacion.html",
+        downloadName: "carta_presentacion_matias_chaparro.html",
       },
     ],
   },
@@ -177,9 +191,9 @@ async function downloadFile(file: AssetFile) {
 function AssetCard({ asset }: { asset: AssetDoc }) {
   const preview = asset.files[0];
   return (
-    <div className="flex flex-col overflow-hidden rounded-card border border-border bg-surface">
+    <div className="hud-frame flex flex-col border border-border bg-surface">
       <div
-        className="flex h-40 w-full items-center justify-center overflow-hidden border-b border-border p-6"
+        className="relative flex h-40 w-full items-center justify-center overflow-hidden border-b border-border p-6"
         style={{
           background: asset.previewBg === "dark" ? "#181818" : "#ededed",
         }}
@@ -203,8 +217,11 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-col gap-1">
-          <h3 className="text-sm font-medium text-heading">{asset.name}</h3>
-          <p className="text-[13px] leading-snug text-text">
+          <h3 className="flex items-center gap-2 text-sm font-normal uppercase tracking-[0.12em] text-heading">
+            <span aria-hidden className="hud-square" />
+            {asset.name}
+          </h3>
+          <p className="text-[13px] font-light leading-snug text-text">
             {asset.description}
           </p>
         </div>
@@ -214,7 +231,7 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
               key={file.downloadName}
               type="button"
               onClick={() => downloadFile(file)}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-bg px-2.5 py-1.5 text-xs font-medium text-text transition-colors hover:border-accent-border hover:text-accent"
+              className="hud-hover inline-flex items-center gap-1.5 rounded-none border border-border bg-bg px-2.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.25em] text-text transition-colors"
             >
               <span aria-hidden>↓</span>
               {file.label}
@@ -224,7 +241,7 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
 
         {/* URLs públicas para consumir el asset desde otras apps (portfolio). */}
         <div className="mt-auto flex flex-col gap-1.5 border-t border-border pt-3">
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-text">
+          <span className="hud-label text-text">
             Usar desde otra app
           </span>
           {asset.files.map((file) => {
@@ -235,9 +252,9 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
                 type="button"
                 onClick={() => copyUrl(url)}
                 title={`Copiar URL (${file.label})`}
-                className="group flex items-center gap-2 rounded-md bg-code-bg px-2 py-1.5 text-left transition-colors hover:bg-accent-bg/50"
+                className="hud-hover group flex items-center gap-2 rounded-none border border-transparent bg-code-bg px-2 py-1.5 text-left transition-colors"
               >
-                <span className="shrink-0 rounded bg-surface px-1.5 py-0.5 font-mono text-[10px] text-text">
+                <span className="shrink-0 rounded-none bg-surface px-1.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-text">
                   {file.label}
                 </span>
                 <code className="min-w-0 flex-1 truncate font-mono text-[11px] text-heading">
@@ -245,7 +262,7 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
                 </code>
                 <span
                   aria-hidden
-                  className="shrink-0 text-[11px] text-text transition-colors group-hover:text-accent"
+                  className="shrink-0 text-[10px] uppercase tracking-[0.2em] text-text transition-colors group-hover:text-hud-accent"
                 >
                   copiar
                 </span>
@@ -265,14 +282,14 @@ function AssetCard({ asset }: { asset: AssetDoc }) {
 export function DocumentsPanel() {
   return (
     <div className="flex flex-col gap-4">
-      <p className="rounded-md border border-border bg-code-bg px-3 py-2 text-[13px] text-text">
+      <p className="rounded-none border border-border bg-code-bg px-3 py-2 text-[13px] font-light text-text">
         Todos los assets son archivos estáticos y públicos. Copiá la URL de
         cualquier formato y usala directo desde otra app (por ejemplo tu
         portfolio) en un <code className="text-accent">&lt;img src&gt;</code>,{" "}
         <code className="text-accent">og:image</code> o{" "}
         <code className="text-accent">&lt;link rel="icon"&gt;</code>.
       </p>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {assets.map((asset) => (
           <AssetCard key={asset.name} asset={asset} />
         ))}

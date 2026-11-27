@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Matías Chaparro · Recorrido</title>
+<meta name="description" content="Recorrido profesional de Matías Chaparro, Desarrollador Full-Stack e Ingeniero Civil Informático: estudios, experiencia laboral, especialidades, idiomas y certificados." />
+<meta name="color-scheme" content="dark light" />
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("recorrido-theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+    document.documentElement.classList.add("js");
+  })();
+</script>
+<style>
+@font-face { font-family: "Stellar"; src: url("../fonts/Stellar-light.woff") format("woff"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Stellar"; src: url("../fonts/Stellar-Regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Stellar"; src: url("../fonts/Stellar-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Stellar"; src: url("../fonts/Stellar-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  --accent: #ff5f1f;
+  --bg: #1c1d1f;
+  --grid-line: rgb(221 221 221 / 0.05);
+  --grid-major: rgb(221 221 221 / 0.1);
+  --surface: #181818;
+  --text: #dddddd;
+  --muted: rgb(221 221 221 / 0.72);
+  --mark: #dddddd;
+  --line: rgb(221 221 221 / 0.3);
+  --inv-bg: #dddddd;
+  --inv-fg: #181818;
+  --dc: 10rem;
+}
+:root[data-theme="light"] {
+  --bg: #c4c4c1;
+  --grid-line: rgb(24 24 24 / 0.07);
+  --grid-major: rgb(24 24 24 / 0.14);
+  --surface: #e7e6e2;
+  --text: #181818;
+  --muted: rgb(24 24 24 / 0.78);
+  --mark: #181818;
+  --line: rgb(24 24 24 / 0.3);
+  --inv-bg: #181818;
+  --inv-fg: #dddddd;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Stellar", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: center top;
+  overflow-wrap: break-word;
+  counter-reset: win;
+}
+::selection { background: var(--accent); color: #181818; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 0; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; padding: .5rem 1rem; background: var(--inv-bg); color: var(--inv-fg); font-weight: 500; text-decoration: none; letter-spacing: .15em; text-transform: uppercase; font-size: .75rem; }
+.skip:focus { top: 1rem; }
+
+/* HUD base */
+.label { font-size: .625rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; line-height: 1.5; }
+.accent { color: var(--accent); }
+.square { display: inline-block; flex: none; width: .5rem; height: .5rem; background: var(--accent); }
+.block { display: inline-block; padding: .25rem .75rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; background: var(--inv-bg); color: var(--inv-fg); }
+.barcode { display: inline-block; flex: none; width: 4.5rem; height: .75rem; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 3px, currentColor 3px 4px, transparent 4px 7px, currentColor 7px 10px, transparent 10px 12px); animation: scan 1.2s steps(6) infinite; }
+.blink { animation: blink 2.4s steps(1) infinite; }
+@keyframes scan { to { background-position-x: 12px; } }
+@keyframes blink { 0%, 80% { opacity: 1; } 81%, 90% { opacity: .2; } }
+
+/* Interruptor de tema */
+.switch { position: fixed; top: .75rem; right: .75rem; z-index: 50; display: flex; flex-direction: column; gap: .25rem; padding: .4rem; font: inherit; font-size: .6rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; cursor: pointer; background: #181818; color: #dddddd; border: 1px solid rgb(221 221 221 / .3); }
+.switch:hover { border-color: var(--accent); }
+.switch-label { display: flex; align-items: center; gap: .4rem; opacity: .75; }
+.switch-label::before { content: ""; width: .35rem; height: .35rem; background: var(--accent); }
+.switch-track { display: flex; border: 1px solid rgb(221 221 221 / .3); }
+.cell { padding: .15rem .4rem .15rem .5rem; }
+:root[data-theme="light"] .cell[data-v="lt"], :root:not([data-theme="light"]) .cell[data-v="dk"] { background: #dddddd; color: #181818; box-shadow: inset 0 -2px 0 var(--accent); }
+
+.page { position: relative; max-width: 60rem; margin: 0 auto; padding: 4.5rem 1rem 3rem; display: flex; flex-direction: column; gap: 2.75rem; }
+@media (min-width: 640px) { .page { padding: 5rem 2rem 4rem; gap: 3.25rem; } }
+
+/* Encabezado */
+.hero { position: relative; padding: 2.75rem 1.25rem 2rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 88%, transparent); display: flex; flex-direction: column; gap: 1.25rem; }
+@media (min-width: 640px) { .hero { padding: 3.25rem 2.5rem 2.5rem; } }
+.cross { position: absolute; font-weight: 300; line-height: 1; color: var(--mark); }
+.cross.tl { top: .6rem; left: .9rem; color: var(--accent); }
+.cross.tr { top: .6rem; right: .9rem; }
+.cross.bl { bottom: .6rem; left: .9rem; }
+.cross.br { bottom: .6rem; right: .9rem; color: var(--accent); }
+.hero-top { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding-right: 0; }
+.hero-top .label { opacity: .8; }
+.name { font-size: clamp(2rem, 9vw, 4.75rem); font-weight: 300; letter-spacing: .14em; line-height: 1.05; text-transform: uppercase; }
+.role { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.role .block { font-size: .8rem; }
+.hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; opacity: .8; }
+
+.links { display: flex; flex-wrap: wrap; gap: .75rem; padding-top: .5rem; }
+.hud-link { display: inline-flex; align-items: center; gap: .6rem; max-width: 100%; padding: .5rem .8rem; font: inherit; font-size: .7rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; text-decoration: none; color: var(--text); background: transparent; border: 1px solid var(--line); cursor: pointer; transition: border-color .2s, background-color .2s; }
+.hud-link:hover, .hud-link:focus-visible { border-color: var(--accent); background: color-mix(in srgb, var(--text) 6%, transparent); }
+.hud-link .idx { font-size: .55rem; opacity: .6; }
+.hud-link .act { font-size: .6rem; opacity: .7; transition: transform .2s; }
+.hud-link:hover .act { transform: translate(2px, -2px); opacity: 1; }
+.hud-link.done { border-color: var(--accent); }
+.hud-link.done .act { color: var(--accent); opacity: 1; }
+
+/* Ventanas */
+.win { position: relative; counter-increment: win; border: 1px solid var(--line); background: var(--surface); margin-top: 1.5rem; }
+.win::before { content: "WIN/0" counter(win); position: absolute; top: -1.5rem; left: 0; font-size: .6rem; font-weight: 500; letter-spacing: .3em; color: var(--mark); opacity: .75; white-space: nowrap; }
+.win::after { content: ""; position: absolute; inset: -7px; pointer-events: none; --c: var(--mark); --a: var(--accent); --l: 14px; --t: 2px;
+  background:
+    linear-gradient(var(--a), var(--a)) top left / var(--l) var(--t),
+    linear-gradient(var(--a), var(--a)) top left / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) top right / var(--l) var(--t),
+    linear-gradient(var(--c), var(--c)) top right / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--t),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--t) var(--l),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--t),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--t) var(--l);
+  background-repeat: no-repeat; }
+.win-bar { display: flex; align-items: center; gap: .75rem; padding: .6rem 1rem; box-shadow: inset 0 -1px 0 var(--accent); }
+.win-bar h2 { margin: 0; flex: 1 1 auto; min-width: 0; font-size: .7rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; line-height: 1.4; }
+.win-bar .barcode { width: 2.5rem; height: .5rem; opacity: .6; animation: none; background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 3px, currentColor 3px 5px, transparent 5px 7px); }
+.win-body { padding: 1.5rem 1.25rem 1.75rem; background-image: repeating-linear-gradient(to bottom, rgb(128 128 128 / .05) 0 1px, transparent 1px 3px); }
+@media (min-width: 640px) { .win-body { padding: 2rem 2rem 2.25rem; } }
+
+.prose { display: flex; flex-direction: column; gap: 1rem; max-width: 46rem; }
+.prose p { font-weight: 300; }
+
+/* Línea de tiempo */
+.tl { position: relative; }
+.tl::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3px; width: 1px; background: var(--line); }
+.tl-item, .tl-year { position: relative; padding-left: 1.5rem; }
+.tl-item { padding-bottom: 2rem; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before { content: ""; position: absolute; left: 0; top: .45rem; width: 8px; height: 8px; background: var(--surface); border: 1px solid var(--text); }
+.tl-item.now::before { background: var(--accent); border-color: var(--accent); }
+.tl-year { padding-bottom: 1rem; }
+.tl-year::before { content: ""; position: absolute; left: 0; top: .6rem; width: 8px; height: 1px; background: var(--accent); }
+.tl-year span { display: inline-block; padding: .1rem .6rem; font-size: .65rem; font-weight: 500; letter-spacing: .3em; background: var(--inv-bg); color: var(--inv-fg); }
+.tl-date { margin-bottom: .35rem; font-size: .65rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.tl-body { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.company { font-size: 1.05rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; }
+.company small { display: block; margin-top: .15rem; font-size: .65rem; font-weight: 500; letter-spacing: .25em; color: var(--muted); }
+.tag { align-self: flex-start; max-width: 100%; padding: .1rem .6rem; font-size: .65rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; line-height: 1.5; border: 1px solid var(--line); }
+.desc { max-width: 42rem; font-weight: 300; }
+@media (min-width: 720px) {
+  .tl::before { left: calc(var(--dc) + 1rem - 1px); }
+  .tl-item, .tl-year { display: grid; grid-template-columns: var(--dc) minmax(0, 1fr); column-gap: 2rem; padding-left: 0; }
+  .tl-item::before { left: calc(var(--dc) + 1rem - 4px); }
+  .tl-year::before { left: calc(var(--dc) + 1rem - 4px); }
+  .tl-year span { grid-column: 2; justify-self: start; }
+  .tl-date { margin: .4rem 0 0; }
+  .tl-date { text-align: right; }
+}
+
+/* Listas */
+.specs { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.spec { display: grid; gap: .25rem 1.5rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 640px) { .spec { grid-template-columns: 11rem minmax(0, 1fr); align-items: baseline; } }
+.spec dt { font-size: .65rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+.spec dd { margin: 0; font-weight: 400; letter-spacing: .04em; }
+.spec dd span + span::before { content: "/"; margin: 0 .55rem; color: var(--accent); }
+.simple { display: flex; flex-direction: column; }
+.simple li { display: flex; align-items: center; gap: .75rem; padding: .75rem 0; border-bottom: 1px solid var(--line); font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+.simple li:first-child { border-top: 1px solid var(--line); }
+.simple .tag { margin-left: auto; align-self: center; }
+
+.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem 1.5rem; padding-top: 1rem; opacity: .8; text-align: center; }
+
+/* Revelado al hacer scroll */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .barcode, .blink { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition: none !important; }
+}
+
+/* Impresión */
+@media print {
+  :root, :root[data-theme="dark"], :root[data-theme="light"] { --bg: #fff; --surface: #fff; --text: #181818; --muted: #333; --mark: #181818; --line: rgb(24 24 24 / .35); --inv-bg: #181818; --inv-fg: #fff; }
+  html, body { background: #fff !important; background-image: none !important; color: #181818; }
+  .switch, .skip, .barcode, .cross { display: none !important; }
+  .page { max-width: none; padding: 0; gap: 1.5rem; }
+  .win::after { display: none; }
+  .win, .hero { background: #fff; break-inside: auto; }
+  .win-body { background-image: none; }
+  .tl-item { break-inside: avoid; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hud-link { border-color: #181818; }
+  a[href^="http"]::after { content: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<button class="switch" type="button" id="theme-switch" aria-label="Cambiar entre tema claro y oscuro">
+  <span class="switch-label" aria-hidden="true">MODE</span>
+  <span class="switch-track" aria-hidden="true"><span class="cell" data-v="lt">LT</span><span class="cell" data-v="dk">DK</span></span>
+</button>
+
+<div class="page">
+  <header class="hero">
+    <span class="cross tl" aria-hidden="true">+</span>
+    <span class="cross tr" aria-hidden="true">+</span>
+    <span class="cross bl" aria-hidden="true">+</span>
+    <span class="cross br" aria-hidden="true">+</span>
+
+    <div class="hero-top" aria-hidden="true">
+      <span class="square blink"></span>
+      <span class="label">SYS/MATI · RECORRIDO / SANTIAGO CL</span>
+    </div>
+
+    <h1 class="name" aria-label="Matías Chaparro"><span data-scramble aria-hidden="true">Matías Chaparro</span></h1>
+
+    <p class="role">
+      <span class="block">Desarrollador Full-Stack</span>
+      <span class="label accent" aria-hidden="true">/</span>
+      <span class="label">Ingeniero Civil Informático</span>
+    </p>
+
+    <div class="hero-meta" aria-hidden="true">
+      <span class="barcode"></span>
+      <span class="label">REC / 2026</span>
+    </div>
+
+    <nav aria-label="Contacto">
+      <ul class="links">
+        <li>
+          <button type="button" class="hud-link" id="copy-email" data-email="matias.chaparro.mail@gmail.com" aria-label="Copiar correo electrónico">
+            <span class="idx" aria-hidden="true">01</span><span>Email</span><span class="act" id="copy-label" aria-hidden="true">copiar</span>
+          </button>
+        </li>
+        <li>
+          <a class="hud-link" href="https://mati-dev.cl" target="_blank" rel="noopener noreferrer" aria-label="Sitio web mati-dev.cl (se abre en una pestaña nueva)">
+            <span class="idx" aria-hidden="true">02</span><span>Sitio</span><span class="act" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="hud-link" href="https://linkedin.com/in/matías-chaparro-díaz-a6749027a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (se abre en una pestaña nueva)">
+            <span class="idx" aria-hidden="true">03</span><span>LinkedIn</span><span class="act" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+  </header>
+
+  <main id="contenido" style="display:flex;flex-direction:column;gap:3.25rem;">
+
+    <section class="win" aria-labelledby="h-sobre">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-sobre" data-scramble>Sobre mí</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <div class="prose">
+          <p>Ingeniero Civil Informático de la Universidad Andrés Bello, actualmente Desarrollador Full-Stack en Anticipa S.A., donde desarrolla soluciones para el sector salud público (FONASA). Su experiencia abarca tanto el desarrollo de interfaces como el de servicios y bases de datos, con foco en arquitecturas escalables y mantenibles.</p>
+          <p>Ha trabajado en los sectores salud, financiero, construcción y datos. Integra agentes de inteligencia artificial en su forma de trabajo y se encuentra ampliando sus conocimientos en ciberseguridad, con especial interés en pentesting.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="win" aria-labelledby="h-estudios">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-estudios" data-scramble>Estudios</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <ol class="tl">
+          <li class="tl-item reveal">
+            <p class="tl-date">2020 – 2025</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Universidad Andrés Bello</h3>
+              <span class="tag">Ingeniería Civil Informática</span>
+              <p class="desc">Formación en ingeniería de software, bases de datos y arquitectura, con metodologías ágiles y bases en Machine Learning y Computer Vision. Tesis enfocada en la integración de componentes electrónicos con modelos de IA.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="win" aria-labelledby="h-experiencia">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-experiencia" data-scramble>Experiencia laboral</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <ol class="tl">
+          <li class="tl-year reveal" aria-label="Año 2026"><span aria-hidden="true">2026</span></li>
+          <li class="tl-item now reveal">
+            <p class="tl-date">Abril 2026 – hoy</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Anticipa S.A.<small>Cliente FONASA</small></h3>
+              <span class="tag">Desarrollador Full-Stack</span>
+              <p class="desc">Desarrollo de soluciones full stack para el sector salud público. Construcción de interfaces y componentes reutilizables, y de microservicios y APIs sobre bases de datos relacionales, con control de acceso por roles, migraciones de base de datos versionadas y pruebas automatizadas.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <p class="tl-date">Febrero 2026 – abril 2026</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Apiux Tech<small>Cliente FONASA</small></h3>
+              <span class="tag">Desarrollador Full-Stack</span>
+              <p class="desc">Desarrollo de interfaces y servicios para procesos internos del sector salud público, con foco en la experiencia del usuario, la integración entre frontend y backend, y la escalabilidad de los sistemas.</p>
+            </div>
+          </li>
+
+          <li class="tl-year reveal" aria-label="Año 2025"><span aria-hidden="true">2025</span></li>
+          <li class="tl-item reveal">
+            <p class="tl-date">Julio 2025 – noviembre 2025</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Forcast</h3>
+              <span class="tag">Desarrollador Full-Stack · remoto</span>
+              <p class="desc">Fintech del sector financiero. Mejora de flujos de usuario y mantenimiento de servicios de la plataforma, integración de servicios externos y tecnologías distribuidas, participación en despliegues y trabajo bajo metodologías ágiles.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <p class="tl-date">Enero 2025 – abril 2025</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">ENTIX</h3>
+              <span class="tag">Desarrollador ETL · remoto</span>
+              <p class="desc">Gestión de procesos de extracción, transformación y carga de datos, diseño de consultas y tablas, monitoreo de procesos y elaboración de reportes ejecutivos para el análisis de información.</p>
+            </div>
+          </li>
+
+          <li class="tl-year reveal" aria-label="Año 2023"><span aria-hidden="true">2023</span></li>
+          <li class="tl-item reveal">
+            <p class="tl-date">Agosto 2023 – enero 2024</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Servcon Obras Civiles</h3>
+              <span class="tag">Desarrollador Full-Stack</span>
+              <p class="desc">Empresa del sector construcción. Planificación técnica y definición de arquitectura de una plataforma web, desarrollo de frontend y backend, modelado de datos y despliegue en servidor propio con medidas de seguridad.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <p class="tl-date">Marzo 2023 – junio 2023</p>
+            <div class="tl-body">
+              <h3 class="company" style="margin:0">Psys</h3>
+              <span class="tag">Desarrollador Back-End · consultor TI</span>
+              <p class="desc">Empresa del sector salud. Análisis del rendimiento de plataformas web en la nube, identificación de cuellos de botella y propuesta de mejoras de arquitectura, eficiencia y escalabilidad.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="win" aria-labelledby="h-especialidades">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-especialidades" data-scramble>Especialidades</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <dl class="specs" style="margin:0">
+          <div class="spec reveal"><dt>Frontend</dt><dd><span>React</span><span>TypeScript</span><span>Tailwind</span></dd></div>
+          <div class="spec reveal"><dt>Backend</dt><dd><span>Python</span><span>FastAPI</span><span>Node.js</span></dd></div>
+          <div class="spec reveal"><dt>Datos</dt><dd><span>PostgreSQL</span><span>SQL</span><span>Oracle</span><span>MongoDB</span><span>Power BI</span></dd></div>
+          <div class="spec reveal"><dt>Infraestructura</dt><dd><span>Docker</span><span>AWS</span><span>Linux</span><span>CI/CD</span></dd></div>
+          <div class="spec reveal"><dt>Forma de trabajo</dt><dd><span>Metodologías ágiles</span><span>Agentes de IA</span><span>Pruebas automatizadas</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="win" aria-labelledby="h-idiomas">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-idiomas" data-scramble>Idiomas</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <ul class="simple">
+          <li class="reveal"><span class="square" aria-hidden="true"></span>Español<span class="tag">Nativo</span></li>
+          <li class="reveal"><span class="square" aria-hidden="true"></span>Inglés<span class="tag">Profesional</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="win" aria-labelledby="h-certificados">
+      <div class="win-bar"><span class="square" aria-hidden="true"></span><h2 id="h-certificados" data-scramble>Certificados</h2><span class="barcode" aria-hidden="true"></span></div>
+      <div class="win-body">
+        <ul class="simple">
+          <li class="reveal"><span class="square" aria-hidden="true"></span>Ingeniero Civil Informático (UNAB)</li>
+          <li class="reveal"><span class="square" aria-hidden="true"></span>Introduction to Cybersecurity</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" aria-hidden="true">
+    <span class="barcode"></span>
+    <span class="label">END OF TRANSMISSION <span class="accent">·</span> MATI-DEV.CL</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Tema */
+  var sw = document.getElementById("theme-switch");
+  sw.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("recorrido-theme", next); } catch (e) {}
+  });
+
+  /* Copiar correo */
+  var btn = document.getElementById("copy-email");
+  var lab = document.getElementById("copy-label");
+  var status = document.getElementById("copy-status");
+  var timer = 0;
+  btn.addEventListener("click", function () {
+    var email = btn.getAttribute("data-email");
+    function ok() {
+      lab.textContent = "copiado";
+      btn.classList.add("done");
+      status.textContent = "Correo copiado al portapapeles";
+      clearTimeout(timer);
+      timer = setTimeout(function () { lab.textContent = "copiar"; btn.classList.remove("done"); }, 1600);
+    }
+    function fail() { status.textContent = "No se pudo copiar. El correo es " + email; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(ok, fail);
+    } else { fail(); }
+  });
+
+  /* Scramble: una sola vez, al ver el elemento */
+  var GLYPHS = "!<>-_\\/[]{}=+*^?#01ABCDEFXZ█▓▒░";
+  function scramble(el) {
+    var finalText = el.textContent;
+    var chars = Array.from(finalText);
+    var frames = Math.ceil(Math.min(1400, Math.max(500, chars.length * 45)) / 30);
+    var reveal = chars.map(function (_, i) {
+      return Math.floor((i / chars.length) * frames * 0.8) + Math.floor(Math.random() * frames * 0.2);
+    });
+    var frame = 0;
+    var t = setInterval(function () {
+      el.textContent = chars.map(function (c, i) {
+        return (c.trim() === "" || frame >= reveal[i]) ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      }).join("");
+      if (++frame > frames) { el.textContent = finalText; clearInterval(t); }
+    }, 30);
+  }
+
+  if (reduce || !("IntersectionObserver" in window)) {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+
+  var so = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      so.unobserve(e.target);
+      scramble(e.target);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll("[data-scramble]").forEach(function (el) {
+    var h = el.tagName === "H2" ? el : null;
+    if (h) h.setAttribute("aria-label", h.textContent);
+    so.observe(el);
+  });
+
+  var ro = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      ro.unobserve(e.target);
+      e.target.classList.add("in");
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
+  document.querySelectorAll(".reveal").forEach(function (el) { ro.observe(el); });
+})();
+</script>
+</body>
+</html>
