@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <!-- rayado diagonal tipo señalética (como las franjas del póster Marathon) -->
+    <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="4" height="4" fill="#181818"/>
+      <rect width="3" height="4" fill="#ff5f1f"/>
+    </pattern>
+    <!-- extremos planos (cortados en horizontal), look estarcido -->
+    <clipPath id="cut"><rect x="0" y="10" width="64" height="44"/></clipPath>
+    <clipPath id="cutShadow"><rect x="0" y="16" width="64" height="44"/></clipPath>
+  </defs>
+  <rect width="64" height="64" fill="#181818"/>
+  <!-- sombra rayada naranja del < -->
+  <g clip-path="url(#cutShadow)">
+    <path d="M30 12.7 10 38l20 25.3" stroke="url(#hatch)" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+  </g>
+  <!-- sombra gris del > -->
+  <g clip-path="url(#cutShadow)">
+    <path d="M39 12.7 59 38 39 63.3" stroke="#6b6b6b" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+  </g>
+  <g clip-path="url(#cut)">
+    <!-- < -->
+    <path d="M27 6.7 7 32l20 25.3" stroke="#dddddd" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+    <!-- > -->
+    <path d="M36 6.7 56 32 36 57.3" stroke="#dddddd" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+  </g>
+</svg>
