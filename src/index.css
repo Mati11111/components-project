@@ -54,15 +54,26 @@
     /* --- tema LIGHT (default) --- */
     --text: #181818;
     --text-h: #181818;
-    --bg: #ffffff;
-    --surface: #f4f4f4;
-    --border: #d6d6d7;
-    --code-bg: #f0f0f0;
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: rgb(24 24 24 / 0.35);
+    --code-bg: #efede8;
     --accent: #181818;
     --accent-bg: rgba(24, 24, 24, 0.08);
     --accent-border: rgba(24, 24, 24, 0.35);
-    --shadow:
-        rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    --shadow: none;
+
+    /* --- marca HUD --- */
+    --hud-accent: #ff5f1f;
+    --hud-mark: #181818;
+    --hud-invert-bg: #181818;
+    --hud-invert-fg: #dddddd;
+    --hud-bar-bg: #181818;
+    --hud-bar-fg: #c9c9c9;
+    --grid-line: rgb(24 24 24 / 0.07);
+    --grid-major: rgb(24 24 24 / 0.14);
+    --hud-line: 2px;
+    --hud-corner: 14px;
 
     --sans: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
     --heading: "Stellar", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -74,32 +85,42 @@
 :root.theme-dark {
     --text: #dddddd;
     --text-h: #dddddd;
-    --bg: #181818;
+    --bg: #1c1d1f;
     --surface: #202124;
-    --border: #424242;
-    --code-bg: #202124;
+    --border: rgb(221 221 221 / 0.25);
+    --code-bg: #181818;
     --accent: #dddddd;
     --accent-bg: rgba(221, 221, 221, 0.1);
     --accent-border: #d6d6d7;
-    --shadow:
-        rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
-        rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow: none;
+    --hud-mark: #dddddd;
+    --hud-invert-bg: #dddddd;
+    --hud-invert-fg: #181818;
+    --hud-bar-bg: #181818;
+    --hud-bar-fg: #dddddd;
+    --grid-line: rgb(221 221 221 / 0.05);
+    --grid-major: rgb(221 221 221 / 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
     :root:not(.light):not(.theme-light) {
         --text: #dddddd;
         --text-h: #dddddd;
-        --bg: #181818;
+        --bg: #1c1d1f;
         --surface: #202124;
-        --border: #424242;
-        --code-bg: #202124;
+        --border: rgb(221 221 221 / 0.25);
+        --code-bg: #181818;
         --accent: #dddddd;
         --accent-bg: rgba(221, 221, 221, 0.1);
         --accent-border: #d6d6d7;
-        --shadow:
-            rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
-            rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+        --shadow: none;
+        --hud-mark: #dddddd;
+        --hud-invert-bg: #dddddd;
+        --hud-invert-fg: #181818;
+        --hud-bar-bg: #181818;
+        --hud-bar-fg: #dddddd;
+        --grid-line: rgb(221 221 221 / 0.05);
+        --grid-major: rgb(221 221 221 / 0.1);
     }
 }
 
@@ -113,6 +134,12 @@
     --color-accent: var(--accent);
     --color-accent-bg: var(--accent-bg);
     --color-accent-border: var(--accent-border);
+    --color-hud-accent: var(--hud-accent);
+    --color-hud-mark: var(--hud-mark);
+    --color-hud-invert-bg: var(--hud-invert-bg);
+    --color-hud-invert-fg: var(--hud-invert-fg);
+    --color-hud-bar-bg: var(--hud-bar-bg);
+    --color-hud-bar-fg: var(--hud-bar-fg);
 
     /* paleta cruda disponible como utilidades (bg-palette-black, etc.) */
     --color-palette-black: var(--c-black);
@@ -128,7 +155,7 @@
 
     --shadow-theme: var(--shadow);
 
-    --radius-card: 12px;
+    --radius-card: 0;
 }
 
 html {
@@ -142,9 +169,20 @@ html {
 body {
     margin: 0;
     min-height: 100svh;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(var(--grid-major) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:
+        120px 120px,
+        120px 120px,
+        24px 24px,
+        24px 24px;
+    background-position: center top;
     color: var(--text);
-    font: 18px/145% var(--sans);
+    font: 300 18px/145% var(--sans);
     letter-spacing: 0.18px;
 }
 
@@ -263,4 +301,202 @@ body {
 }
 .no-scrollbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari y Opera */
+}
+
+
+/* ==========================================================================
+   Marca HUD (réplica de hud.css del portfolio): solo Stellar, un acento
+   naranja para detalles, formas rectas, bordes de 1px y sin sombras.
+   ========================================================================== */
+
+::selection {
+    background: var(--hud-accent);
+    color: #181818;
+}
+
+:focus-visible {
+    outline: 2px solid var(--hud-accent);
+    outline-offset: 2px;
+    border-radius: 0;
+}
+
+/* Scrollbar recta. scrollbar-width/color solo donde no existe ::-webkit-scrollbar
+   (en Chrome 121+ anularían la forma recta). */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--hud-mark);
+    border: none;
+    border-radius: 0 !important;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--hud-mark) transparent;
+    }
+}
+
+/* Etiqueta técnica: chica, mayúscula, muy espaciada */
+.hud-label {
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+/* Bloque invertido (subtítulo) */
+.hud-block {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--hud-invert-bg);
+    color: var(--hud-invert-fg);
+}
+
+/* Código de barras decorativo */
+.hud-barcode {
+    display: inline-block;
+    width: 4.5rem;
+    height: 0.75rem;
+    background: repeating-linear-gradient(
+        90deg,
+        currentColor 0 2px,
+        transparent 2px 3px,
+        currentColor 3px 4px,
+        transparent 4px 7px,
+        currentColor 7px 10px,
+        transparent 10px 12px
+    );
+    animation: hudScan 1.2s steps(6) infinite;
+}
+
+.hud-square {
+    display: inline-block;
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--hud-accent);
+}
+
+.hud-cross {
+    position: absolute;
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 300;
+    color: var(--hud-mark);
+    pointer-events: none;
+}
+
+.hud-cross-accent {
+    color: var(--hud-accent);
+}
+
+/* Marco con esquinas de registro (esquina superior izquierda en naranja).
+   El elemento no debe tener overflow: hidden (el pseudo-elemento sale 7px). */
+.hud-frame {
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+.hud-frame::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    pointer-events: none;
+    z-index: 5;
+    --c: var(--hud-mark);
+    --a: var(--hud-accent);
+    background:
+        linear-gradient(var(--a), var(--a)) top left / var(--hud-corner) var(--hud-line),
+        linear-gradient(var(--a), var(--a)) top left / var(--hud-line) var(--hud-corner),
+        linear-gradient(var(--c), var(--c)) top right / var(--hud-corner) var(--hud-line),
+        linear-gradient(var(--c), var(--c)) top right / var(--hud-line) var(--hud-corner),
+        linear-gradient(var(--c), var(--c)) bottom left / var(--hud-corner) var(--hud-line),
+        linear-gradient(var(--c), var(--c)) bottom left / var(--hud-line) var(--hud-corner),
+        linear-gradient(var(--c), var(--c)) bottom right / var(--hud-corner) var(--hud-line),
+        linear-gradient(var(--c), var(--c)) bottom right / var(--hud-line) var(--hud-corner);
+    background-repeat: no-repeat;
+}
+
+/* Barra de título: fondo oscuro, texto en mayúsculas espaciadas, cuadrito
+   naranja a la izquierda y línea fina naranja abajo. */
+.hud-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--hud-bar-bg);
+    color: var(--hud-bar-fg);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    box-shadow: inset 0 -1px 0 var(--hud-accent);
+}
+
+.hud-titlebar::before {
+    content: "";
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--hud-accent);
+}
+
+/* Ítem de navegación: seleccionado = invertido + inset naranja a la izquierda */
+.hud-item {
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+}
+
+.hud-item:hover {
+    border-color: var(--hud-accent);
+}
+
+.hud-item.is-active {
+    background: var(--hud-invert-bg);
+    color: var(--hud-invert-fg);
+    border-color: var(--hud-invert-bg);
+    box-shadow: inset 3px 0 0 var(--hud-accent);
+}
+
+/* Tarjetas/swatches: hover de borde en naranja */
+.hud-hover:hover {
+    border-color: var(--hud-accent);
+}
+
+@keyframes hudScan {
+    to {
+        background-position-x: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Ítem activo dentro de una barra de título (fondo ya oscuro): se invierte
+   hacia el color de texto de la barra. */
+.hud-titlebar .hud-item.is-active {
+    background: var(--hud-bar-fg);
+    color: var(--hud-bar-bg);
+    border-color: var(--hud-bar-fg);
 }

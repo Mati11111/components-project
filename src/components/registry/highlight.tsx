@@ -68,15 +68,22 @@ const KEYWORDS = new Set([
   "namespace",
 ]);
 
-/** Colores por tipo de token (usan la paleta del tema). */
+/** Colores por tipo de token (grises del tema). */
 const COLORS: Record<TokenType, string> = {
-  comment: "#6a9955",
-  string: "#ce9178",
-  keyword: "#c586c0",
-  type: "#4ec9b0",
-  number: "#b5cea8",
-  punct: "#808080",
+  comment: "color-mix(in srgb, var(--text) 50%, transparent)",
+  string: "var(--text-h)",
+  keyword: "var(--text-h)",
+  type: "var(--text-h)",
+  number: "var(--text)",
+  punct: "color-mix(in srgb, var(--text) 60%, transparent)",
   plain: "inherit",
+};
+
+/** Peso por tipo de token: la jerarquía va por peso, no por color. */
+const WEIGHTS: Partial<Record<TokenType, number>> = {
+  keyword: 500,
+  type: 500,
+  comment: 300,
 };
 
 /**
@@ -176,7 +183,10 @@ export function Highlight({ code }: HighlightProps): ReactNode {
         const color = COLORS[token.type];
         if (color === "inherit") return token.value;
         return (
-          <span key={index} style={{ color }}>
+          <span
+            key={index}
+            style={{ color, fontWeight: WEIGHTS[token.type] }}
+          >
             {token.value}
           </span>
         );

@@ -23,16 +23,16 @@ export function CodeBlock({ code, language = "tsx", className }: CodeBlockProps)
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg border border-border bg-code-bg",
+        "relative overflow-hidden rounded-none border border-border bg-code-bg",
         className,
       )}
     >
-      <div className="flex items-center justify-between border-b border-border px-3 py-1.5">
-        <span className="font-mono text-xs text-text">{language}</span>
+      <div className="hud-titlebar justify-between">
+        <span className="font-mono">{language}</span>
         <button
           type="button"
           onClick={copy}
-          className="rounded-md px-2 py-1 text-xs font-medium text-text transition-colors hover:bg-accent-bg hover:text-accent"
+          className="rounded-none border border-transparent px-2 py-0.5 uppercase tracking-[0.2em] text-hud-bar-fg transition-colors hover:border-hud-accent"
         >
           Copiar
         </button>

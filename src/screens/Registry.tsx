@@ -11,8 +11,43 @@ import {
   type CodeModalFile,
 } from "@/components/registry/CodeModal";
 import { Badge } from "@/components/ui/Badge";
-import { PageTitle } from "@/components/ui/PageTitle";
-import { ThemeToggle } from "@/react-components";
+import { useEffect } from "react";
+import { HudSwitch } from "@/components/hud/HudSwitch";
+
+/** Interruptor de tema con estética HUD (LT | DK). Guarda la elección en localStorage. */
+function ThemeSwitch() {
+  const [dark, setDark] = useState(() => {
+    const stored = localStorage.getItem("theme");
+    return (
+      stored === "dark" ||
+      (stored !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  });
+
+  // Aplica el tema al documento cada vez que cambia.
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.classList.toggle("light", !dark);
+  }, [dark]);
+
+  const toggle = () => {
+    const next = !dark;
+    localStorage.setItem("theme", next ? "dark" : "light");
+    setDark(next);
+  };
+
+  return (
+    <HudSwitch
+      label="MODE"
+      options={["LT", "DK"]}
+      activeIndex={dark ? 1 : 0}
+      onToggle={toggle}
+      ariaLabel={dark ? "Activar modo claro" : "Activar modo oscuro"}
+      checked={dark}
+    />
+  );
+}
 
 type View =
   | { kind: "component"; slug: string }
@@ -28,7 +63,8 @@ function Section({
 }) {
   return (
     <section className="flex flex-col gap-3">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-text">
+      <h3 className="hud-label flex items-center gap-3 text-heading">
+        <span aria-hidden className="hud-square" />
         {title}
       </h3>
       {children}
@@ -56,12 +92,12 @@ function ComponentDoc({ entry }: { entry: RegistryEntry }) {
     <article className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2">
-          <h2 className="text-3xl font-medium text-heading">{entry.name}</h2>
+          <h2 className="text-3xl font-light uppercase tracking-[0.08em] text-heading">{entry.name}</h2>
           <Badge variant="neutral">{entry.category}</Badge>
           <button
             type="button"
             onClick={() => setCodeOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1 text-xs font-medium text-text transition-colors hover:border-accent-border hover:text-accent"
+            className="hud-label hud-hover inline-flex items-center gap-1.5 rounded-none border border-border bg-surface px-2.5 py-1 text-text transition-colors"
           >
             <span aria-hidden className="font-mono">
               {"</>"}
@@ -173,12 +209,35 @@ export function Registry() {
 
   return (
     <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-4">
-      <header className="flex items-start justify-between gap-4 border-b border-border py-6">
-        <PageTitle
-          text="Librería de componentes"
-          subtitle="Componentes genéricos para desarrollo"
-        />
-        <ThemeToggle />
+      <header className="relative flex items-start justify-between gap-4 border-b border-border px-6 py-10 sm:px-10">
+        {/* marcas decorativas HUD */}
+        <span aria-hidden className="hud-cross left-2 top-2">+</span>
+        <span aria-hidden className="hud-cross hud-cross-accent right-2 top-2">
+          +
+        </span>
+        <span aria-hidden className="hud-cross bottom-2 left-2">+</span>
+        <span aria-hidden className="hud-cross bottom-2 right-2">+</span>
+
+        <div className="flex min-w-0 flex-col gap-4">
+          <div
+            aria-hidden
+            className="hud-label flex flex-wrap items-center gap-x-6 gap-y-1 text-text"
+          >
+            <span className="flex items-center gap-2">
+              <span className="hud-square" />
+              SYS/MATI · COMPONENTS / SANTIAGO CL
+            </span>
+            <span>v2026 · ONLINE</span>
+            <span className="hud-barcode text-hud-mark" />
+          </div>
+          <h1 className="text-3xl font-light uppercase tracking-[0.25em] text-heading sm:text-5xl">
+            Librería de componentes
+          </h1>
+          <p className="hud-block self-start text-sm">
+            Componentes genéricos para desarrollo
+          </p>
+        </div>
+        <ThemeSwitch />
       </header>
 
       <div className="flex flex-1 flex-col gap-8 py-8 md:flex-row">
@@ -196,7 +255,7 @@ export function Registry() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar…"
               aria-label="Buscar componentes"
-              className="h-9 w-full rounded-md border border-border bg-bg pl-7 pr-2 text-sm text-heading placeholder:text-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-border"
+              className="hud-hover h-9 w-full rounded-none border border-border bg-surface pl-7 pr-2 text-sm text-heading placeholder:text-text transition-colors"
             />
           </div>
 
@@ -212,7 +271,7 @@ export function Registry() {
                   type="button"
                   onClick={() => toggleSection(category)}
                   aria-expanded={!isCollapsed}
-                  className="flex items-center justify-between gap-2 rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-heading"
+                  className="hud-label flex items-center justify-between gap-2 rounded-none px-2 py-1 text-text transition-colors hover:text-heading"
                 >
                   <span>{category}</span>
                   <span
@@ -234,10 +293,10 @@ export function Registry() {
                         setView({ kind: "component", slug: entry.slug })
                       }
                       className={cn(
-                        "rounded-md px-2 py-1.5 text-left text-sm transition-colors",
+                        "hud-item rounded-none px-2 py-1.5 text-left text-xs transition-colors",
                         view.kind === "component" && view.slug === entry.slug
-                          ? "bg-accent-bg font-medium text-accent"
-                          : "text-text hover:bg-accent-bg/50 hover:text-heading",
+                          ? "is-active"
+                          : "text-text",
                       )}
                     >
                       {entry.name}
@@ -253,7 +312,7 @@ export function Registry() {
                 type="button"
                 onClick={() => toggleSection("Sistema")}
                 aria-expanded={!systemCollapsed}
-                className="flex items-center justify-between gap-2 rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wide text-text transition-colors hover:text-heading"
+                className="hud-label flex items-center justify-between gap-2 rounded-none px-2 py-1 text-text transition-colors hover:text-heading"
               >
                 <span>Sistema</span>
                 <span
@@ -273,10 +332,10 @@ export function Registry() {
                     type="button"
                     onClick={() => setView(item.view)}
                     className={cn(
-                      "rounded-md px-2 py-1.5 text-left text-sm transition-colors",
+                      "hud-item rounded-none px-2 py-1.5 text-left text-xs transition-colors",
                       view.kind === item.view.kind
-                        ? "bg-accent-bg font-medium text-accent"
-                        : "text-text hover:bg-accent-bg/50 hover:text-heading",
+                        ? "is-active"
+                        : "text-text",
                     )}
                   >
                     {item.label}
@@ -290,7 +349,7 @@ export function Registry() {
           {view.kind === "colors" ? (
             <article className="flex flex-col gap-6">
               <header className="flex flex-col gap-2">
-                <h2 className="text-3xl font-medium text-heading">Colores</h2>
+                <h2 className="text-3xl font-light uppercase tracking-[0.08em] text-heading">Colores</h2>
                 <p className="text-text">
                   La paleta base de 6 colores de la plataforma y los tokens
                   semánticos del tema. Hacé clic en cualquier swatch para
@@ -302,7 +361,7 @@ export function Registry() {
           ) : view.kind === "documents" ? (
             <article className="flex flex-col gap-6">
               <header className="flex flex-col gap-2">
-                <h2 className="text-3xl font-medium text-heading">Documentos</h2>
+                <h2 className="text-3xl font-light uppercase tracking-[0.08em] text-heading">Documentos</h2>
                 <p className="text-text">
                   Assets de marca para descargar: la imagen social, la firma y
                   el icono de perfil. Descargá el formato que necesites.
