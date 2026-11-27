@@ -39,10 +39,10 @@ export function ComponentPreview({ demo }: ComponentPreviewProps) {
       type="button"
       onClick={() => setActiveVariant(index)}
       className={cn(
-        "w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors",
+        "hud-item w-full rounded-none px-3 py-1.5 text-left text-sm transition-colors",
         index === activeVariant
-          ? "bg-accent-bg font-medium text-accent"
-          : "text-text hover:bg-accent-bg/50 hover:text-heading",
+          ? "is-active"
+          : "text-text hover:text-heading",
       )}
     >
       {variant.label}
@@ -54,21 +54,21 @@ export function ComponentPreview({ demo }: ComponentPreviewProps) {
   return (
     <div className="flex flex-col gap-2">
       {demo.title && (
-        <h4 className="text-sm font-medium text-heading">{demo.title}</h4>
+        <h4 className="hud-label text-heading">{demo.title}</h4>
       )}
 
-      <div className="overflow-hidden rounded-card border border-border">
-        <div className="flex gap-1 border-b border-border bg-surface p-1.5">
+      <div className="hud-frame m-2 rounded-none">
+        <div className="hud-titlebar gap-1 py-1.5">
           {(["preview", "code"] as const).map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTab(t)}
               className={cn(
-                "rounded-md px-3 py-1 text-sm font-medium transition-colors",
+                "hud-item rounded-none px-3 py-1 text-xs transition-colors",
                 tab === t
-                  ? "bg-accent-bg text-accent"
-                  : "text-text hover:text-heading",
+                  ? "is-active"
+                  : "text-hud-bar-fg hover:border-hud-accent",
               )}
             >
               {t === "preview" ? "Preview" : "Código"}

@@ -47,7 +47,7 @@ export default function Seo({
   siteUrl = SEO.siteUrl,
   locale = SEO.locale,
   themeColor = SEO.themeColor,
-  favicon = `${import.meta.env.BASE_URL}favicon.svg?v=2`,
+  favicon = `${import.meta.env.BASE_URL}favicon-hud.svg?v=11`,
 }: SeoProps = {}) {
   const title = seoTitle(section);
 

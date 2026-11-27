@@ -20,7 +20,7 @@ function TokenSwatch({ token }: { token: ColorToken }) {
     <button
       type="button"
       onClick={() => copyValue(`var(${token.cssVar})`, token.name)}
-      className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface text-left transition-shadow hover:shadow-theme"
+      className="group flex flex-col overflow-hidden rounded-none border border-border bg-surface text-left transition-colors hud-hover"
     >
       <span
         className="h-20 w-full border-b border-border"
@@ -28,17 +28,17 @@ function TokenSwatch({ token }: { token: ColorToken }) {
       />
       <span className="flex flex-col gap-1 p-3">
         <span className="flex items-center justify-between">
-          <span className="text-sm font-medium text-heading">{token.name}</span>
-          <span className="text-[11px] text-text transition-colors group-hover:text-accent">
+          <span className="text-sm font-normal text-heading">{token.name}</span>
+          <span className="hud-label text-text transition-colors group-hover:text-hud-accent">
             copiar var
           </span>
         </span>
-        <code className="font-mono text-[12px] text-accent">{token.cssVar}</code>
-        <span className="flex gap-2 font-mono text-[11px] text-text">
+        <code className="font-mono text-xs text-accent">{token.cssVar}</code>
+        <span className="flex gap-2 font-mono text-xs text-text">
           <span title="Modo claro">◻ {token.light}</span>
           <span title="Modo oscuro">◼ {token.dark}</span>
         </span>
-        <span className="text-[11px] text-text">{token.usage}</span>
+        <span className="text-xs text-text">{token.usage}</span>
       </span>
     </button>
   );
@@ -49,7 +49,7 @@ function PaletteSwatch({ color }: { color: PaletteColor }) {
     <button
       type="button"
       onClick={() => copyValue(color.hex, color.name)}
-      className="group flex flex-col overflow-hidden rounded-card border border-border bg-surface text-left transition-shadow hover:shadow-theme"
+      className="group flex flex-col overflow-hidden rounded-none border border-border bg-surface text-left transition-colors hud-hover"
     >
       <span
         className="h-20 w-full border-b border-border"
@@ -57,16 +57,16 @@ function PaletteSwatch({ color }: { color: PaletteColor }) {
       />
       <span className="flex flex-col gap-1 p-3">
         <span className="flex items-center justify-between">
-          <span className="text-sm font-medium text-heading">{color.name}</span>
-          <span className="text-[11px] text-text transition-colors group-hover:text-accent">
+          <span className="text-sm font-normal text-heading">{color.name}</span>
+          <span className="hud-label text-text transition-colors group-hover:text-hud-accent">
             copiar hex
           </span>
         </span>
         <code className="font-mono text-[13px] uppercase text-heading">
           {color.hex}
         </code>
-        <code className="font-mono text-[11px] text-accent">{color.cssVar}</code>
-        <span className="text-[11px] text-text">{color.usage}</span>
+        <code className="font-mono text-xs text-accent">{color.cssVar}</code>
+        <span className="text-xs text-text">{color.usage}</span>
       </span>
     </button>
   );
@@ -87,7 +87,7 @@ export function ColorPalette({
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-text">
+          <h3 className="hud-label text-text">
             Paleta base
           </h3>
           <p className="text-sm text-text">
@@ -103,12 +103,12 @@ export function ColorPalette({
 
       <section className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-text">
+          <h3 className="hud-label text-text">
             Tokens del tema
           </h3>
           <p className="text-sm text-text">
             Variables semánticas que cambian entre light y dark. Clic para
-            copiar su <code className="text-accent">var()</code>.
+            copiar su <code className="text-heading">var()</code>.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">

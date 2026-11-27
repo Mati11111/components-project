@@ -55,7 +55,7 @@ export function CodeModal({ open, onClose, title, files }: CodeModalProps) {
         <button
           type="button"
           onClick={copy}
-          className="rounded-md px-2.5 py-1 text-xs font-medium text-text transition-colors hover:bg-accent-bg hover:text-accent"
+          className="hud-item rounded-none px-2.5 py-1 text-xs text-text transition-colors"
         >
           Copiar
         </button>
@@ -70,9 +70,9 @@ export function CodeModal({ open, onClose, title, files }: CodeModalProps) {
               type="button"
               onClick={() => setActiveIndex(index)}
               className={cn(
-                "rounded-md px-2.5 py-1 font-mono text-xs transition-colors",
+                "hud-item rounded-none px-2.5 py-1 font-mono text-xs transition-colors",
                 index === activeIndex
-                  ? "bg-accent-bg text-accent"
+                  ? "is-active"
                   : "text-text hover:text-heading",
               )}
               title={file.filePath}
